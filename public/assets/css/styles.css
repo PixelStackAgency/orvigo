@@ -1,0 +1,21 @@
+/* --- public/assets/css/styles.css --- */
+:root{
+  --brand:#0d6efd;
+  --muted:#6c757d;
+}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+.navbar-brand img{border-radius:6px}
+.card{border-radius:12px}
+.btn-primary{background:var(--brand);border-color:var(--brand)}
+.sticky-top{top:90px}
+
+/* Accessibility helpers */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+/* Booking form summary */
+#booking-summary li{margin-bottom:.25rem}
+
+/* Responsive sticky bottom for mobile */
+@media(max-width:767px){
+  .mobile-bottom-bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #ddd;padding:.5rem;display:flex;gap:.5rem;align-items:center;z-index:1050}
+}

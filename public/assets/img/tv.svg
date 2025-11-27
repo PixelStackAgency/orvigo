@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120">
+  <rect width="100%" height="100%" fill="#fff7fb"/>
+  <rect x="20" y="20" width="160" height="80" rx="6" fill="#fff" stroke="#ffd9ec" />
+  <text x="100" y="60" text-anchor="middle" fill="#e83e8c" font-size="12">Television</text>
+</svg>

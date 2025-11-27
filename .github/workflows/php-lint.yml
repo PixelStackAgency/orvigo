@@ -1,0 +1,29 @@
+name: PHP Lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  phplint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+      - name: Display PHP version
+        run: php -v
+      - name: Run php -l on all PHP files
+        run: |
+          set -e
+          find . -type f -name "*.php" \( -path "./vendor/*" -prune \) -o -print | while read file; do
+            if [[ "$file" == "./.github/workflows/php-lint.yml" ]]; then
+              continue
+            fi
+            echo "Linting: $file"
+            php -l "$file"
+          done

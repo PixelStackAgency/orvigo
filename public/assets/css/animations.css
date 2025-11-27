@@ -1,0 +1,9 @@
+/* --- public/assets/css/animations.css --- */
+.fade-up{opacity:0;transform:translateY(12px);transition:all .6s ease-out}
+.aos-animate .fade-up{opacity:1;transform:none}
+
+.card img{transition:transform .25s ease, box-shadow .25s ease}
+.card:hover img{transform:scale(1.03)}
+
+.btn{transition:transform .12s ease, box-shadow .12s ease}
+.btn:active{transform:translateY(1px)}

@@ -1,4 +1,11 @@
 // --- public/assets/js/main.js ---
+
+// Helper to get API URL (matches validation.js)
+function getApiUrl(endpoint) {
+  const base = window.ORVIGO && window.ORVIGO.API_BASE ? window.ORVIGO.API_BASE : window.location.origin;
+  return base + '/api/' + endpoint;
+}
+
 document.addEventListener('DOMContentLoaded', function(){
   // Quick booking redirect
   const qForm = document.getElementById('quick-booking-form');
@@ -31,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function(){
       e.preventDefault();
       const id = document.getElementById('booking_id').value.trim();
       const phone = document.getElementById('phone').value.trim();
-      fetch('../api/get-booking.php?booking_id=' + encodeURIComponent(id) + '&phone=' + encodeURIComponent(phone))
+      fetch(getApiUrl('get-booking.php') + '?booking_id=' + encodeURIComponent(id) + '&phone=' + encodeURIComponent(phone))
         .then(r => r.json()).then(data => {
           const out = document.getElementById('booking-result');
           if(data.success){

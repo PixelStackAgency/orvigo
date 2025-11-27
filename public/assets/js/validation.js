@@ -1,5 +1,12 @@
 // --- public/assets/js/validation.js ---
 // Basic front-end helpers
+
+// Helper to get API URL
+function getApiUrl(endpoint) {
+  const base = window.ORVIGO && window.ORVIGO.API_BASE ? window.ORVIGO.API_BASE : window.location.origin;
+  return base + '/api/' + endpoint;
+}
+
 document.addEventListener('DOMContentLoaded', function(){
   // Hook service booking forms
   const serviceForm = document.getElementById('service-booking-form');
@@ -29,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function(){
       serviceForm.querySelectorAll('input[name="service_options[]"]:checked').forEach(ch=>payload.service_options.push(ch.value));
 
       // Send booking to server first
-      fetch('../api/book-service.php', {
+      fetch(getApiUrl('book-service.php'), {
         method:'POST',
         headers:{'Accept':'application/json','X-Requested-With':'XMLHttpRequest','Content-Type':'application/json'},
         body: JSON.stringify(payload)
@@ -39,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function(){
         // If online payment selected, create order and open Razorpay Checkout
         if(payload.payment_mode === 'online'){
           try{
-            const orderResp = await fetch('../api/create-order.php', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({booking_id: booking.booking_id, amountPaise: 10000})});
+            const orderResp = await fetch(getApiUrl('create-order.php'), {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({booking_id: booking.booking_id, amountPaise: 10000})});
             const orderJson = await orderResp.json();
             if(!orderJson.success){ alert('Payment init failed'); return; }
             const order = orderJson.order;
@@ -52,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function(){
               order_id: order.id,
               handler: function (response){
                 // Confirm payment with server
-                fetch('../api/confirm-payment.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({booking_id: booking.booking_id, razorpay_payment_id: response.razorpay_payment_id, razorpay_order_id: response.razorpay_order_id, razorpay_signature: response.razorpay_signature})}).then(r=>r.json()).then(j=>{
+                fetch(getApiUrl('confirm-payment.php'), {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({booking_id: booking.booking_id, razorpay_payment_id: response.razorpay_payment_id, razorpay_order_id: response.razorpay_order_id, razorpay_signature: response.razorpay_signature})}).then(r=>r.json()).then(j=>{
                   if(j.success){ alert('Payment success and booking confirmed.'); window.location='my-bookings.php'; } else { alert('Payment verification failed.'); }
                 });
               },

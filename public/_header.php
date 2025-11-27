@@ -24,12 +24,16 @@ require_once __DIR__ . '/../src/helpers.php';
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/animations.css">
 
+  <!-- Meta tags for environment configuration -->
+  <meta name="razorpay-key" content="<?php echo defined("RAZORPAY_KEY_ID") ? RAZORPAY_KEY_ID : ""; ?>">
+
   <script>
-    window.ORVIGO = {
-      baseUrl: '<?php echo orvigo_base_url(); ?>',
-      RAZORPAY_KEY_ID: '<?php echo defined("RAZORPAY_KEY_ID") ? RAZORPAY_KEY_ID : ""; ?>'
-    };
+    // Initialize Orvigo config before loading other scripts
+    window.ORVIGO = window.ORVIGO || {};
+    window.ORVIGO.baseUrl = '<?php echo orvigo_base_url(); ?>';
+    window.ORVIGO.RAZORPAY_KEY_ID = '<?php echo defined("RAZORPAY_KEY_ID") ? RAZORPAY_KEY_ID : ""; ?>';
   </script>
+  <script src="config.js"></script>
 </head>
 <body>
 

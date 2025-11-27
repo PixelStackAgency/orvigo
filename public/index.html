@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orvigo — Home Appliance & Electronics Repair</title>
+  <meta name="description" content="Fast, trusted home-appliance & electronics repair at your doorstep.">
+  
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --success: #198754;
+      --danger: #dc3545;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    
+    .navbar {
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .hero {
+      background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    
+    .service-card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    
+    .service-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+    
+    .booking-form {
+      background: #f8f9fa;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .modal-backdrop {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    .footer {
+      background: #2c3e50;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 60px;
+    }
+    
+    .alert-success {
+      animation: slideIn 0.5s ease;
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .loading {
+      display: none;
+    }
+    
+    .loading.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/">
+      <i class="fas fa-tools"></i> Orvigo
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#book" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</a></li>
+        <li class="nav-item"><a class="nav-link" href="#track" data-bs-toggle="modal" data-bs-target="#trackModal">Track</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main style="margin-top: 70px;">
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="container">
+    <h1>Fast Home Appliance Repair</h1>
+    <p>Expert technicians at your doorstep, same-day service available</p>
+    <button class="btn btn-light btn-lg me-2" data-bs-toggle="modal" data-bs-target="#bookingModal">
+      <i class="fas fa-calendar"></i> Book Service
+    </button>
+    <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#trackModal">
+      <i class="fas fa-search"></i> Track Booking
+    </button>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section class="py-5" id="services">
+  <div class="container">
+    <h2 class="text-center mb-5">Our Services</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="service-card p-4 text-center h-100">
+          <div class="service-icon"><i class="fas fa-wind"></i></div>
+          <h5>AC Service & Repair</h5>
+          <p class="text-muted">Cleaning, repair, and maintenance for all AC types</p>
+          <button class="btn btn-sm btn-primary" onclick="selectService('AC Service')">Book Now</button>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="service-card p-4 text-center h-100">
+          <div class="service-icon"><i class="fas fa-snowflake"></i></div>
+          <h5>Refrigerator Repair</h5>
+          <p class="text-muted">Cooling, compressor, and electrical issues</p>
+          <button class="btn btn-sm btn-primary" onclick="selectService('Refrigerator Repair')">Book Now</button>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="service-card p-4 text-center h-100">
+          <div class="service-icon"><i class="fas fa-tshirt"></i></div>
+          <h5>Washing Machine</h5>
+          <p class="text-muted">Repair, maintenance, and drainage issues</p>
+          <button class="btn btn-sm btn-primary" onclick="selectService('Washing Machine')">Book Now</button>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="service-card p-4 text-center h-100">
+          <div class="service-icon"><i class="fas fa-tv"></i></div>
+          <h5>TV Repair</h5>
+          <p class="text-muted">Screen, audio, and connectivity problems</p>
+          <button class="btn btn-sm btn-primary" onclick="selectService('TV Repair')">Book Now</button>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="service-card p-4 text-center h-100">
+          <div class="service-icon"><i class="fas fa-fire"></i></div>
+          <h5>Geyser Repair</h5>
+          <p class="text-muted">Water heater repair and maintenance</p>
+          <button class="btn btn-sm btn-primary" onclick="selectService('Geyser Repair')">Book Now</button>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="service-card p-4 text-center h-100">
+          <div class="service-icon"><i class="fas fa-microwave"></i></div>
+          <h5>Microwave Repair</h5>
+          <p class="text-muted">Heating and control issues</p>
+          <button class="btn btn-sm btn-primary" onclick="selectService('Microwave Repair')">Book Now</button>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="service-card p-4 text-center h-100">
+          <div class="service-icon"><i class="fas fa-droplet"></i></div>
+          <h5>Water Purifier</h5>
+          <p class="text-muted">Service and filter replacement</p>
+          <button class="btn btn-sm btn-primary" onclick="selectService('Water Purifier')">Book Now</button>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="service-card p-4 text-center h-100">
+          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h5>Mobile & Tablet</h5>
+          <p class="text-muted">Screen, battery, and repair services</p>
+          <button class="btn btn-sm btn-primary" onclick="selectService('Mobile & Tablet')">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING MODAL -->
+<div class="modal fade" id="bookingModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Book a Service</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="bookingForm">
+          <div class="mb-3">
+            <label class="form-label">Service Type</label>
+            <select class="form-select" id="service" required>
+              <option value="">Select a service</option>
+              <option value="AC Service">AC Service & Repair</option>
+              <option value="Refrigerator Repair">Refrigerator Repair</option>
+              <option value="Washing Machine">Washing Machine Repair</option>
+              <option value="TV Repair">TV Repair</option>
+              <option value="Geyser Repair">Geyser Repair</option>
+              <option value="Microwave Repair">Microwave Repair</option>
+              <option value="Water Purifier">Water Purifier Service</option>
+              <option value="Mobile & Tablet">Mobile & Tablet Repair</option>
+            </select>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="name" required>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="phone" pattern="[0-9]{10}" required>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Address</label>
+            <textarea class="form-control" id="address" rows="3" required></textarea>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Preferred Date</label>
+            <input type="date" class="form-control" id="date" required>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Problem Description</label>
+            <textarea class="form-control" id="description" rows="3" placeholder="Describe the issue..."></textarea>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Payment Method</label>
+            <select class="form-select" id="paymentMethod">
+              <option value="cash">Pay on Arrival</option>
+              <option value="online">Pay Online (Razorpay)</option>
+            </select>
+          </div>
+          
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-grow-1">
+              <span class="loading show" id="submitLoading"><i class="fas fa-spinner fa-spin"></i></span>
+              <span id="submitText">Book Service</span>
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+        
+        <div id="bookingMessage" class="mt-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRACK BOOKING MODAL -->
+<div class="modal fade" id="trackModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Track Your Booking</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="trackForm">
+          <div class="mb-3">
+            <label class="form-label">Booking ID</label>
+            <input type="text" class="form-control" id="trackId" placeholder="e.g., ORV-2024-001" required>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="trackPhone" pattern="[0-9]{10}" required>
+          </div>
+          
+          <button type="submit" class="btn btn-primary w-100">Search Booking</button>
+        </form>
+        
+        <div id="trackMessage" class="mt-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2024 Orvigo - Home Appliance Repair. All rights reserved.</p>
+    <p>Email: support@orvigo.local | Phone: 1800-ORVIGO-1</p>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Razorpay -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+// Global variables
+const API_BASE = '/api';
+let currentBooking = null;
+
+// Select service from card button
+function selectService(serviceName) {
+  document.getElementById('service').value = serviceName;
+  const bookingModal = new bootstrap.Modal(document.getElementById('bookingModal'));
+  bookingModal.show();
+}
+
+// Booking form submission
+document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const formData = {
+    service: document.getElementById('service').value,
+    name: document.getElementById('name').value,
+    phone: document.getElementById('phone').value,
+    address: document.getElementById('address').value,
+    date: document.getElementById('date').value,
+    description: document.getElementById('description').value,
+    paymentMethod: document.getElementById('paymentMethod').value
+  };
+  
+  try {
+    showLoading('submitLoading', true);
+    
+    const response = await fetch(`${API_BASE}/book`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      currentBooking = result.booking;
+      showMessage('bookingMessage', `✅ Booking created! ID: ${result.booking.id}`, 'success');
+      
+      if (formData.paymentMethod === 'online') {
+        setTimeout(() => initiatePayment(result.booking), 1000);
+      } else {
+        setTimeout(() => {
+          document.getElementById('bookingForm').reset();
+          alert('Booking confirmed! You will receive a confirmation SMS shortly.');
+          bootstrap.Modal.getInstance(document.getElementById('bookingModal')).hide();
+        }, 2000);
+      }
+    } else {
+      showMessage('bookingMessage', `❌ Error: ${result.error}`, 'danger');
+    }
+  } catch (error) {
+    showMessage('bookingMessage', `❌ Network error: ${error.message}`, 'danger');
+  } finally {
+    showLoading('submitLoading', false);
+  }
+});
+
+// Track booking form submission
+document.getElementById('trackForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const bookingId = document.getElementById('trackId').value;
+  const phone = document.getElementById('trackPhone').value;
+  
+  try {
+    const response = await fetch(`${API_BASE}/track?id=${bookingId}&phone=${phone}`);
+    const result = await response.json();
+    
+    if (result.success) {
+      const booking = result.booking;
+      showMessage('trackMessage', `
+        <div class="alert alert-info">
+          <strong>Booking Found!</strong><br>
+          Service: ${booking.service}<br>
+          Status: ${booking.status}<br>
+          Date: ${booking.date}<br>
+          Amount: ₹${booking.amount || 'TBD'}
+        </div>
+      `, 'info');
+    } else {
+      showMessage('trackMessage', `❌ Booking not found`, 'danger');
+    }
+  } catch (error) {
+    showMessage('trackMessage', `❌ Error: ${error.message}`, 'danger');
+  }
+});
+
+// Initiate Razorpay payment
+function initiatePayment(booking) {
+  const options = {
+    key: 'rzp_test_1234567890abcde', // Replace with your key
+    amount: 50000, // ₹500 in paise
+    currency: 'INR',
+    name: 'Orvigo',
+    description: booking.service,
+    order_id: booking.id,
+    handler: (response) => {
+      confirmPayment(booking.id, response);
+    },
+    prefill: {
+      name: booking.name,
+      contact: booking.phone
+    }
+  };
+  
+  const rzp = new Razorpay(options);
+  rzp.open();
+}
+
+// Confirm payment
+async function confirmPayment(bookingId, paymentResponse) {
+  try {
+    const response = await fetch(`${API_BASE}/confirm-payment`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        bookingId,
+        paymentId: paymentResponse.razorpay_payment_id,
+        orderId: paymentResponse.razorpay_order_id,
+        signature: paymentResponse.razorpay_signature
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      alert('✅ Payment successful! Your booking is confirmed.');
+      bootstrap.Modal.getInstance(document.getElementById('bookingModal')).hide();
+      document.getElementById('bookingForm').reset();
+    } else {
+      alert('❌ Payment verification failed');
+    }
+  } catch (error) {
+    alert(`❌ Error: ${error.message}`);
+  }
+}
+
+// Utility functions
+function showMessage(elementId, message, type) {
+  const element = document.getElementById(elementId);
+  element.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+}
+
+function showLoading(elementId, show) {
+  const element = document.getElementById(elementId);
+  if (show) {
+    element.classList.add('show');
+  } else {
+    element.classList.remove('show');
+  }
+}
+
+// Set minimum date to today
+document.getElementById('date').min = new Date().toISOString().split('T')[0];
+</script>
+
+</body>
+</html>

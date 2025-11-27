@@ -1,33 +1,48 @@
 # .vercelignore - Files to exclude from Vercel deployment
-# Only the 'public' folder is deployed to Vercel (frontend only)
 
 # Git
 .git
 .gitignore
 
-# Node modules (if any)
-node_modules
+# Node modules
+node_modules/
 
 # Development
 .env
 .env.local
 *.log
 
-# Backend files (not needed for Vercel)
-api/
+# Old backend files (we're using serverless now)
 src/
 Dockerfile
 render.yaml
 gen_hash.php
+push_orvigo.ps1
+deploy_live.ps1
+setup_secrets.ps1
+
+# Old PHP files
+**/*.php
 
 # Config files
 .github/
-push_orvigo.ps1
-deploy_live.ps1
 
-# Development docs (optional - remove lines below to include in deployment)
+# Development docs (optional)
 DEPLOYMENT_GUIDE.md
 RAZORPAY_SETUP.md
 LIVE_DEPLOYMENT.md
 README.md
+QUICK_START.md
+DEPLOYMENT_READY.md
+DEPLOYMENT_SUMMARY.txt
+DEPLOYMENT_CHECKLIST.ps1
+START_HERE.md
+00_READ_ME_FIRST.txt
+DEPLOY.md
+PUSH_TO_GITHUB.md
+
+# Tools
+tools/
+logs/
+storage/
 
